@@ -3,8 +3,8 @@ package com.lucas.product.api.repository;
 import com.lucas.product.api.dto.Product;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public class ProductRepositoryImpl implements ProductRepository {
+@Repository("MySql")
+public class MySqlRepository implements ProductRepository {
 
   @Override
   public Product save(Product product) {
