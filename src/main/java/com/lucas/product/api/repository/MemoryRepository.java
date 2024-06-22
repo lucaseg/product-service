@@ -33,6 +33,6 @@ public class MemoryRepository implements ProductRepository {
 
   @Override
   public void delete(Long id) {
-
+    products.remove(id);
   }
 }
