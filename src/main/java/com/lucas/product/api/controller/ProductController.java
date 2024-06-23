@@ -1,7 +1,7 @@
 package com.lucas.product.api.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.lucas.product.api.dto.Product;
+import com.lucas.product.api.dto.ProductDto;
 import com.lucas.product.api.dto.request.ProductRequest;
 import com.lucas.product.api.service.ProductService;
 import jakarta.validation.Valid;
@@ -25,28 +25,28 @@ public class ProductController {
   private final ObjectMapper mapper = new ObjectMapper();
 
   @PostMapping("")
-  public ResponseEntity<?> createProduct(@RequestBody @Valid ProductRequest productRequest,
+  public ResponseEntity<ProductDto> createProduct(@RequestBody @Valid ProductRequest productRequest,
       @RequestHeader("x-caller-id") String caller) {
-    Product product = mapper.convertValue(productRequest, Product.class);
-    Product productCreated = productService.create(product, caller);
-    return ResponseEntity.ok(productCreated);
+    ProductDto productDto = mapper.convertValue(productRequest, ProductDto.class);
+    ProductDto productDtoCreated = productService.create(productDto, caller);
+    return ResponseEntity.ok(productDtoCreated);
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<?> getProductById(@PathVariable Long id) {
+  public ResponseEntity<ProductDto> getProductById(@PathVariable Long id) {
     var product = productService.findById(id);
     return ResponseEntity.ok(product);
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<?> updateProduct(@PathVariable Long id, @RequestBody Product product,
+  public ResponseEntity<ProductDto> updateProduct(@PathVariable Long id, @RequestBody ProductDto productDto,
       @RequestHeader("x-caller-id") String caller) {
-    var productUpdated = productService.update(id, product, caller);
+    var productUpdated = productService.update(id, productDto, caller);
     return ResponseEntity.ok(productUpdated);
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<?> deleteProduct(@PathVariable Long id) {
+  public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
     productService.delete(id);
     return ResponseEntity.noContent().build();
   }

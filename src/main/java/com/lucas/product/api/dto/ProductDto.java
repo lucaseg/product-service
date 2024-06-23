@@ -3,7 +3,8 @@ package com.lucas.product.api.dto;
 import lombok.Data;
 
 @Data
-public class Product {
+public class ProductDto {
+  private Long id;
   private String name;
   private String category;
   private String description;
