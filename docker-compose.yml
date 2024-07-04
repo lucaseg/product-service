@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: product_service
+      MYSQL_USER: lucas
+      MYSQL_PASSWORD: lucas
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: db
+      PMA_USER: lucas
+      PMA_PASSWORD: lucas
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+volumes:
+  db_data:

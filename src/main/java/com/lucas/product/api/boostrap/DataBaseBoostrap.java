@@ -16,7 +16,7 @@ public class DataBaseBoostrap implements CommandLineRunner {
   private final ProductRepository productRepository;
 
   @Override
-  public void run(String... args) throws Exception {
+  public void run(String... args) {
     Product product = new Product();
     product.setName("first");
     product.setDescription("first description");
